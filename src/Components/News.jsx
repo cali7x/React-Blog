@@ -6,17 +6,7 @@ import userImg from '../assets/images/assets/images/user.jpg'
 import noImg from '../assets/images/assets/images/no-img.png'
 import axios from 'axios'
 
-const categories = [
-    'general',
-    'world',
-    'business',
-    'technology',
-    'entertainment',
-    'sports',
-    'science',
-    'health',
-    'nation',
-]
+const categories = ["general", "world", "business","technology", "entertainment", "sports", "science", "health", "nation"]
 
 const News = () => {
     const [headline, setHeadline] = useState(null)
@@ -25,7 +15,7 @@ const News = () => {
 
     useEffect(() => {
         const fetchNews = async () => {
-            const url = 'https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
+            const url = 'https://gnews.io/api/v4/top-headlines?category=general&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
 
             const response = await axios.get(url)
             const fetchedNews = response.data.articles
@@ -44,11 +34,6 @@ const News = () => {
 
         fetchNews()
 }, [selectedCategory])
-
-    const handleCategoryClick = (e, category) => {
-        e.preventDefault()
-        setSelectedCategory(category)
-    }
 
     return (
         <div className="news">
@@ -73,16 +58,17 @@ const News = () => {
                     <nav className="categories">
                         <h1 className='nav-heading'>Categories</h1>
                         <div className="nav-links">
-                            {categories.map((category) => (<a href="#" key={category} className='nav-link' 
-                            onClick={(e) => handleCategoryClick(e, category)}
-                                >
-                                    {category}
-                            </a>
-                            ))}
-                            
-                            <a href="#" className='nav-link'>
+                            <a href="a" className='nav-link'>General</a>
+                            <a href="a" className='nav-link'>World</a>
+                            <a href="a" className='nav-link'>Business</a>
+                            <a href="a" className='nav-link'>Technology</a>
+                            <a href="a" className='nav-link'>Sports</a>
+                            <a href="a" className='nav-link'>Science</a>
+                            <a href="a" className='nav-link'>Health</a>
+                            <a href="a" className='nav-link'>Nation</a>
+                            <a href="a" className='nav-link'>
                                 Bookmarks <i className='fa-regular fa-bookmark'></i>
-                            </a>
+                                </a>
                         </div>
                     </nav>
                 </div>
