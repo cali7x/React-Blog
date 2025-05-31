@@ -15,7 +15,7 @@ const categories = [
     'sports',
     'science',
     'health',
-    'nation',
+    'nation'
 ]
 
 const News = () => {
@@ -25,7 +25,8 @@ const News = () => {
 
     useEffect(() => {
         const fetchNews = async () => {
-            const url = 'https://gnews.io/api/v4/top-headlines?category=${selectedCategory}&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
+            const category = selectedCategory
+            const url = 'https://gnews.io/api/v4/top-headlines?category=' + category + '&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
 
             const response = await axios.get(url)
             const fetchedNews = response.data.articles
@@ -39,13 +40,13 @@ const News = () => {
             setHeadline(fetchedNews[0])
             setNews(fetchedNews.slice(1, 7))
 
-            console.log(fetchedNews[0])
+            console.log(news)
         }
 
         fetchNews()
-}, [selectedCategory])
+    }, [selectedCategory])
 
-    const handleCategoryClick = (e, category) => {
+    function handleCategoryClick(e, category) {
         e.preventDefault()
         setSelectedCategory(category)
     }
@@ -71,16 +72,15 @@ const News = () => {
                         <p>Mary's Blog</p>
                     </div>
                     <nav className="categories">
-                        <h1 className='nav-heading'>Categories</h1>
+                        <h1 className="nav-heading">Categories</h1>
                         <div className="nav-links">
-                            {categories.map((category) => (<a href="#" key={category} className='nav-link' 
+                            {categories.map((category) => (<a href="#" key={category} className="nav-link" 
                             onClick={(e) => handleCategoryClick(e, category)}
                                 >
                                     {category}
                             </a>
                             ))}
-                            
-                            <a href="#" className='nav-link'>
+                            <a href="#" className="nav-link">
                                 Bookmarks <i className='fa-regular fa-bookmark'></i>
                             </a>
                         </div>
