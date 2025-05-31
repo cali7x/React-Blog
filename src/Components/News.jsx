@@ -22,11 +22,18 @@ const News = () => {
     const [headline, setHeadline] = useState(null)
     const [news, setNews] = useState([])
     const [selectedCategory, setSelectedCategory] = useState('general')
+    const [searchInput, setSeachInput] = useState('')
+    const [searchQuery, setSeachQuery] = useState('')
 
     useEffect(() => {
         const fetchNews = async () => {
             const category = selectedCategory
-            const url = 'https://gnews.io/api/v4/top-headlines?category=' + category + '&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
+            let url = 'https://gnews.io/api/v4/top-headlines?category=' + category + '&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
+
+            if(searchQuery) {
+                const query = searchQuery
+                url = 'https://gnews.io/api/v4/search?q='+ query + '&lang=en&apikey=371dcba8621b7341f57e7f91b5a5d669'
+            }
 
             const response = await axios.get(url)
             const fetchedNews = response.data.articles
@@ -44,11 +51,17 @@ const News = () => {
         }
 
         fetchNews()
-    }, [selectedCategory])
+    }, [selectedCategory, searchQuery])
 
     function handleCategoryClick(e, category) {
         e.preventDefault()
         setSelectedCategory(category)
+    }
+
+    const handleSearch = (e) => {
+        e.preventDefault()
+        setSeachQuery(searchInput)
+        setSeachInput('')
     }
 
     return (
@@ -56,8 +69,8 @@ const News = () => {
             <header className="news-header">
                 <h1 className='logo'>News & Blogs</h1>
                 <div className="search-bar">
-                    <form>
-                        <input type="text" placeholder="Search News..." />
+                    <form onSubmit={handleSearch}>
+                        <input type="text" placeholder="Search News..." value={searchInput} onChange={(e) => setSeachInput(e.target.value)}/>
                         <button type='submit'>
                             <i className='fa-solid
                             fa-magnifying-glass'></i>
