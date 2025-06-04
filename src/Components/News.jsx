@@ -5,6 +5,7 @@ import './News.css'
 import userImg from '../assets/images/assets/images/user.jpg'
 import noImg from '../assets/images/assets/images/no-img.png'
 import axios from 'axios'
+import NewsModal from './NewsModal'
 
 const categories = [
     'general',
@@ -117,10 +118,10 @@ const News = () => {
                                 <i className="fa-regular fa-bookmark bookmark"></i>
                             </h3>
                         </div>
-                        ))}    
-                        
+                        ))}        
                     </div>
                 </div>
+                <NewsModal />
                 <div className="my-blogs">My Blogs</div>
                 <div className="weather-calendar">
                 <Weather />
